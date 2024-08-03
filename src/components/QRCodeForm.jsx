@@ -85,7 +85,7 @@ const QRCodeForm = () => {
   return (
     <div className="container mx-auto p-6 max-w-lg">
       <h1 className="text-4xl font-extrabold text-center text-blue-700 mb-6">
-        QR Code Generator
+        QR Profile Generator
       </h1>
       <form
         method="post"
