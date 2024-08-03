@@ -270,7 +270,7 @@ const QRCodeForm = () => {
           >
             Download QR Code
           </button>
-          <div className="flex justify-center space-x-4 mt-3">
+          {/* <div className="flex justify-center space-x-4 mt-3">
             <FacebookShareButton
               url={qrImageUrl}
               quote={"Check out my QR code!"}
@@ -292,7 +292,7 @@ const QRCodeForm = () => {
             >
               <WhatsappIcon size={32} round />
             </WhatsappShareButton>
-          </div>
+          </div> */}
         </div>
       )}
     </div>
