@@ -260,41 +260,43 @@ const QRCodeForm = () => {
       </form>
 
       {qrValue && (
-        <div className="mt-8 text-center">
-          <div id="qrcode" className="mb-4 text-center">
-            <QRCode value={qrValue} size={240} level="H" includeMargin={true} />
-          </div>
-          <button
-            onClick={downloadQRCode}
-            className="bg-green-500 text-white py-2 px-4 rounded-md font-semibold hover:bg-green-600 transition duration-300 mr-4"
-          >
-            Download QR Code
-          </button>
-          {/* <div className="flex justify-center space-x-4 mt-3">
-            <FacebookShareButton
-              url={qrImageUrl}
-              quote={"Check out my QR code!"}
-              className="text-gray-600 hover:text-gray-800 transition duration-300"
-            >
-              <FacebookIcon size={32} round />
-            </FacebookShareButton>
-            <TwitterShareButton
-              url={qrImageUrl}
-              title={"Check out my QR code!"}
-              className="text-gray-600 hover:text-gray-800 transition duration-300"
-            >
-              <TwitterIcon size={32} round />
-            </TwitterShareButton>
-            <WhatsappShareButton
-              url={qrImageUrl}
-              title={"Check out my QR code!"}
-              className="text-gray-600 hover:text-gray-800 transition duration-300"
-            >
-              <WhatsappIcon size={32} round />
-            </WhatsappShareButton>
-          </div> */}
-        </div>
-      )}
+  <div className="flex flex-col items-center mt-8">
+    <div id="qrcode" className="mb-4">
+      <QRCode value={qrValue} size={240} level="H" includeMargin={true} />
+    </div>
+    <button
+      onClick={downloadQRCode}
+      className="bg-green-500 text-white py-2 px-4 rounded-md font-semibold hover:bg-green-600 transition duration-300"
+    >
+      Download QR Code
+    </button>
+    {/* Uncomment this section to enable social sharing buttons */}
+    {/* <div className="flex justify-center space-x-4 mt-3">
+      <FacebookShareButton
+        url={qrImageUrl}
+        quote={"Check out my QR code!"}
+        className="text-gray-600 hover:text-gray-800 transition duration-300"
+      >
+        <FacebookIcon size={32} round />
+      </FacebookShareButton>
+      <TwitterShareButton
+        url={qrImageUrl}
+        title={"Check out my QR code!"}
+        className="text-gray-600 hover:text-gray-800 transition duration-300"
+      >
+        <TwitterIcon size={32} round />
+      </TwitterShareButton>
+      <WhatsappShareButton
+        url={qrImageUrl}
+        title={"Check out my QR code!"}
+        className="text-gray-600 hover:text-gray-800 transition duration-300"
+      >
+        <WhatsappIcon size={32} round />
+      </WhatsappShareButton>
+    </div> */}
+  </div>
+)}
+
     </div>
   );
 };
