@@ -27,23 +27,46 @@ const ScannedDataDisplay = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-blue-50 to-blue-100 py-12">
-      <div className="bg-white p-8 rounded-lg shadow-xl max-w-lg w-full">
+      <div className="bg-white p-8 rounded-lg shadow-xl max-w-4xl w-full">
         <h1 className="text-4xl font-extrabold text-center text-blue-600 mb-8">
           Personal Info
         </h1>
-        <div className="space-y-4">
-          {dataLines.map((line, index) => (
-            <div key={index} className="relative">
-              <label className="block text-gray-700 font-medium mb-1">
-                {line.key}
-              </label>
-              <textarea
-                readOnly
-                value={line.value || ""}
-                className="w-full h-16 bg-gray-100 border border-gray-300 rounded-lg p-3 text-gray-700 resize-none overflow-auto"
-              />
-            </div>
-          ))}
+        <div className="overflow-x-auto">
+          <table className="min-w-full divide-y divide-gray-200">
+            <thead className="bg-blue-50">
+              <tr>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Field
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Value
+                </th>
+              </tr>
+            </thead>
+            <tbody className="bg-white divide-y divide-gray-200">
+              {dataLines.map((line, index) => (
+                <tr key={index}>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                    {line.key}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {line.key === "Website" ? (
+                      <a
+                        href={line.value}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-500 hover:underline"
+                      >
+                        {line.value || "N/A"}
+                      </a>
+                    ) : (
+                      line.value || "N/A"
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

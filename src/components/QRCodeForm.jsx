@@ -20,11 +20,12 @@ const QRCodeForm = () => {
     const newErrors = {};
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const mobileRegex = /^\d{10}$/;
-    const landlineRegex = /^\d{10}$/; // Adjust regex if landline numbers have a different format
+    const landlineRegex = /^\+91\d{10}$|^\d{2,4}-\d{6,8}$/;
 
     if (!details.name.trim()) newErrors.name = "Name is required.";
     if (!landlineRegex.test(details.landline))
-      newErrors.landline = "Invalid landline number. It should be 10 digits.";
+      newErrors.landline =
+        "Invalid landline number. It should be 10 digits with or without country code, or in the format with area code.";
     if (!mobileRegex.test(details.mobile))
       newErrors.mobile = "Invalid mobile number. It should be 10 digits.";
     if (!emailRegex.test(details.email))
@@ -267,30 +268,6 @@ const QRCodeForm = () => {
           >
             Download QR Code
           </button>
-          {/* Uncomment this section to enable social sharing buttons */}
-          {/* <div className="flex justify-center space-x-4 mt-3">
-            <FacebookShareButton
-              url={qrImageUrl}
-              quote={"Check out my QR code!"}
-              className="text-gray-600 hover:text-gray-800 transition duration-300"
-            >
-              <FacebookIcon size={32} round />
-            </FacebookShareButton>
-            <TwitterShareButton
-              url={qrImageUrl}
-              title={"Check out my QR code!"}
-              className="text-gray-600 hover:text-gray-800 transition duration-300"
-            >
-              <TwitterIcon size={32} round />
-            </TwitterShareButton>
-            <WhatsappShareButton
-              url={qrImageUrl}
-              title={"Check out my QR code!"}
-              className="text-gray-600 hover:text-gray-800 transition duration-300"
-            >
-              <WhatsappIcon size={32} round />
-            </WhatsappShareButton>
-          </div> */}
         </div>
       )}
     </div>
