@@ -1,21 +1,13 @@
 import QRCode from "qrcode.react";
 import React, { useState } from "react";
-import {
-  FacebookIcon,
-  FacebookShareButton,
-  TwitterIcon,
-  TwitterShareButton,
-  WhatsappIcon,
-  WhatsappShareButton,
-} from "react-share";
 
 const QRCodeForm = () => {
   const [details, setDetails] = useState({
     name: "",
-    city: "",
-    dob: "",
+    landline: "",
     mobile: "",
     email: "",
+    website: "",
     address1: "",
     address2: "",
     address3: "",
@@ -28,10 +20,11 @@ const QRCodeForm = () => {
     const newErrors = {};
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const mobileRegex = /^\d{10}$/;
+    const landlineRegex = /^\d{10}$/; // Adjust regex if landline numbers have a different format
 
     if (!details.name.trim()) newErrors.name = "Name is required.";
-    if (!details.city.trim()) newErrors.city = "City is required.";
-    if (!details.dob) newErrors.dob = "Date of Birth is required.";
+    if (!landlineRegex.test(details.landline))
+      newErrors.landline = "Invalid landline number. It should be 10 digits.";
     if (!mobileRegex.test(details.mobile))
       newErrors.mobile = "Invalid mobile number. It should be 10 digits.";
     if (!emailRegex.test(details.email))
@@ -50,8 +43,10 @@ const QRCodeForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validate()) {
-      const formattedDetails = `Name: ${details.name}\nCity: ${details.city}\nDOB: ${details.dob}\nMobile: ${details.mobile}\nEmail: ${details.email}\nAddress1: ${details.address1}\nAddress2: ${details.address2}\nAddress3: ${details.address3}`;
-      const qrUrl = `${window.location.origin}/scanned-data?data=${encodeURIComponent(formattedDetails)}`;
+      const formattedDetails = `Name: ${details.name}\nLandline: ${details.landline}\nMobile: ${details.mobile}\nEmail: ${details.email}\nWebsite: ${details.website}\nAddress1: ${details.address1}\nAddress2: ${details.address2}\nAddress3: ${details.address3}`;
+      const qrUrl = `${
+        window.location.origin
+      }/scanned-data?data=${encodeURIComponent(formattedDetails)}`;
       setQrValue(qrUrl);
 
       // Convert QR code to base64 data URL
@@ -93,7 +88,10 @@ const QRCodeForm = () => {
         >
           <div className="space-y-4">
             <div>
-              <label htmlFor="name" className="block text-gray-700 font-semibold">
+              <label
+                htmlFor="name"
+                className="block text-gray-700 font-semibold"
+              >
                 Name
               </label>
               <input
@@ -113,42 +111,27 @@ const QRCodeForm = () => {
               )}
             </div>
             <div>
-              <label htmlFor="city" className="block text-gray-700 font-semibold">
-                City
+              <label
+                htmlFor="landline"
+                className="block text-gray-700 font-semibold"
+              >
+                Landline Number
               </label>
               <input
                 type="text"
-                id="city"
-                name="city"
-                value={details.city}
+                id="landline"
+                name="landline"
+                value={details.landline}
                 onChange={handleChange}
                 className={`border p-3 w-full rounded-md focus:outline-none focus:ring-2 ${
-                  errors.city
+                  errors.landline
                     ? "border-red-500 focus:ring-red-500"
                     : "border-gray-300 focus:ring-blue-500"
                 }`}
               />
-              {errors.city && (
-                <p className="text-red-500 text-sm">{errors.city}</p>
+              {errors.landline && (
+                <p className="text-red-500 text-sm">{errors.landline}</p>
               )}
-            </div>
-            <div>
-              <label htmlFor="dob" className="block text-gray-700 font-semibold">
-                Date of Birth (DD-MM-YYYY)
-              </label>
-              <input
-                type="date"
-                id="dob"
-                name="dob"
-                value={details.dob}
-                onChange={handleChange}
-                className={`border p-3 w-full rounded-md focus:outline-none focus:ring-2 ${
-                  errors.dob
-                    ? "border-red-500 focus:ring-red-500"
-                    : "border-gray-300 focus:ring-blue-500"
-                }`}
-              />
-              {errors.dob && <p className="text-red-500 text-sm">{errors.dob}</p>}
             </div>
             <div>
               <label
@@ -195,6 +178,22 @@ const QRCodeForm = () => {
               {errors.email && (
                 <p className="text-red-500 text-sm">{errors.email}</p>
               )}
+            </div>
+            <div>
+              <label
+                htmlFor="website"
+                className="block text-gray-700 font-semibold"
+              >
+                Website
+              </label>
+              <input
+                type="url"
+                id="website"
+                name="website"
+                value={details.website}
+                onChange={handleChange}
+                className="border p-3 w-full rounded-md focus:outline-none focus:ring-2 border-gray-300 focus:ring-blue-500"
+              />
             </div>
             <div>
               <label
